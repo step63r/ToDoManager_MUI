@@ -9,9 +9,9 @@ using System.Windows.Media;
 [assembly: AssemblyTitle("ToDoManager")]
 [assembly: AssemblyDescription("やることリスト――いわゆるToDo――を手軽にメモするソフトです。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("NEC Solution Innovators, Co, Ltd.")]
+[assembly: AssemblyCompany("minato project")]
 [assembly: AssemblyProduct("ToDoManager_MUI")]
-[assembly: AssemblyCopyright("Copyright © Ryosuke UCHIYAMA 2017")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,5 +37,5 @@ using System.Windows.Media;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2017.12.18.0")]
-[assembly: AssemblyFileVersion("2017.12.18.0")]
+[assembly: AssemblyVersion("2018.1.3.0")]
+[assembly: AssemblyFileVersion("2018.1.3.0")]
