@@ -1,0 +1,143 @@
+﻿<mui:ModernWindow x:Class="ToDoManager_MUI.Views.MainWindowView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:tb="http://www.hardcodet.net/taskbar"
+                  xmlns:common="clr-namespace:ToDoManager_MUI.Common"
+                  xmlns:be="clr-namespace:ToDoManager_MUI.Behaviors"
+                  xmlns:Prism="http://prismlibrary.com/"
+                  Prism:ViewModelLocator.AutoWireViewModel="True"
+                  mc:Ignorable="d" 
+                  Width="600" Height="400"
+                  d:DesignHeight="400" d:DesignWidth="600"
+                  Title="ToDoManager"
+                  Closing="ModernWindow_Closing"
+                  
+                  Icon="/ToDoManager_MUI;component/Resources/todomanager_mui.ico"
+                  Style="{StaticResource BlankWindow}">
+    <Window.Resources>
+        <common:DateTodayConverter x:Key="TodayConverter"/>
+        <common:DateOverConverter x:Key="OverConverter"/>
+        <common:DateTomorrowConverter x:Key="TomorrowConverter"/>
+        <common:DateTodayMultiConverter x:Key="TodayMultiConverter"/>
+        <common:DateTomorrowMultiConverter x:Key="TomorrowMultiConverter"/>
+        <common:DatePastMultiConverter x:Key="PastMultiConverter"/>
+        <BitmapImage x:Key="AppIcon" UriSource="/ToDoManager_MUI;component/Resources/todomanager_mui.ico"/>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <Prism:InteractionRequestTrigger SourceObject="{Binding ShowCreateDialogRequest}">
+            <common:ShowAnotherWindowAction />
+        </Prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <ScrollViewer>
+        <StackPanel>
+            <!--通知領域用-->
+            <tb:TaskbarIcon x:Name="tbMain"  IconSource="{StaticResource AppIcon}" ToolTipText="{Binding Path=TaskBarMessage}" TrayMouseDoubleClick="ShowMenuItem_Click">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="表示" FontWeight="Bold" Click="ShowMenuItem_Click" />
+                        <MenuItem Header="新規作成" Command="{Binding CreateNewCommand}" />
+                        <MenuItem Header="終了" Click="ExitMenuItem_Click" />
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
+            
+            <Button x:Name="btnCreateNew" Content="新規作成" Margin="0,0,0,10" Command="{Binding CreateNewCommand}"/>
+            <DataGrid x:Name="dgToDo" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionMode="Single" ItemsSource="{Binding Path=ColToDo}" SelectedItem="{Binding Path=SelectedToDo}">
+                <DataGrid.InputBindings>
+                    <!--ダブルクリックのイベント-->
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataGridDoubleClick}"/>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SetFocusCommand}"/>
+                    <!--Enterキー押下のイベント（ダブルクリック押下と同じ）-->
+                    <KeyBinding Key="Enter" Command="{Binding DataGridDoubleClick}"/>
+                    <!--Deleteキー押下のイベント-->
+                    <KeyBinding Key="Delete" Command="{Binding DataGridDelete}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger>
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource TodayMultiConverter}">
+                                        <Binding Path="Date"/>
+                                        <Binding Path="Today"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#a2ded0"/>
+                            </DataTrigger>
+                            <DataTrigger>
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource TomorrowMultiConverter}">
+                                        <Binding Path="Date"/>
+                                        <Binding Path="Today"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#c5eff7"/>
+                            </DataTrigger>
+                            <DataTrigger>
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource PastMultiConverter}">
+                                        <Binding Path="Date"/>
+                                        <Binding Path="Today"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#e08283"/>
+                            </DataTrigger>
+                            <!--<DataTrigger Binding="{Binding Path=Date, Converter={StaticResource TodayConverter}}">
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#a2ded0"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource OverConverter}}">
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#e08283"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource TomorrowConverter}}">
+                                <DataTrigger.Value>true</DataTrigger.Value>
+                                <Setter Property="Background" Value="#c5eff7"/>
+                            </DataTrigger>-->
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <!--<DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                --><!--<Setter Property="Background" Value="Transparent"></Setter>--><!--
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>-->
+                <!--<DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <TextBlock Background="#ecf0f1" Text="{Binding Detail}" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>-->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="期限" Width="2*" Binding="{Binding Date, StringFormat={}{0:yyyy/MM/dd (ddd)}, ConverterCulture=ja-JP}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="やること" Width="5*" Binding="{Binding Title}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+</mui:ModernWindow>
