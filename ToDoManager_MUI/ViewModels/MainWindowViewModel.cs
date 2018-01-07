@@ -156,6 +156,9 @@ namespace ToDoManager_MUI.ViewModels
             {
                 item.Today = DateTime.Today;
             }
+
+            // 通知領域テキスト作成
+            TaskBarMessage = CreateTaskBarMessage(ColToDo);
         }
 
         /// <summary>
