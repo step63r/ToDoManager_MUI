@@ -1,42 +1,42 @@
 # ToDoManager
 ## Overview
-��邱�ƁiToDo�j���Ǘ�����c�[���ł��B
+やること（ToDo）を管理するツールです。
 
 ## Requirement
 * Windows 10 Home 
-* .NET Framework 4.5 �ȏ�
+* .NET Framework 4.5 以上
 
 ## Install
-������Ŕz�z���Ă��܂��B  
-<http://projectstep.web.fc2.com/computer/csp/progs.html>  
-�C���X�g�[�������s���A���̎w���ɏ]���Ă��������B
+こちらで配布しています。  
+<http://minatopj.php.xdomain.jp/computer/csp/progs.html>  
+インストーラを実行し、その指示に従ってください。
 
 ## Usage
-�u�V�K�쐬�v�{�^�����^�X�N���쐬���ĉ������B  
-�����̑O���A�����A�����؂��F�����ŕ\�����܂��B  
-�����������O�̃g�[�X�g�ʒm�@�\�Ȃǂ͎������Ă��܂���B  
+「新規作成」ボタンよりタスクを作成して下さい。  
+期限の前日、当日、期限切れを色分けで表示します。  
+ただし期限前のトースト通知機能などは実装していません。  
 
-����{�^���ŃA�v���P�[�V�������I�����Ă��ʒm�̈�ɏ풓���܂��B  
-�v���Z�X���I������ꍇ�͒ʒm�̈���E�N���b�N�ŏI�����ĉ������B
+閉じるボタンでアプリケーションを終了しても通知領域に常駐します。  
+プロセスを終了する場合は通知領域を右クリックで終了して下さい。
 
 
 ## Disclaimer
-�{�\�t�g�E�F�A��p���Ă����Ȃ鑹���𐶂��Ă�  
-�����ł͐ӔC�𕉂����˂܂��̂ł��������������B
+本ソフトウェアを用いていかなる損失を生じても  
+当方では責任を負いかねますのでご了承ください。
 
 ## License
-�{�\�t�g�E�F�A�̃��C�Z���X�� MIT License �ɏ]���܂��B
+本ソフトウェアのライセンスは MIT License に従います。
 
 ## Contact Us
 <dl>
-    <dt>�T�C�g</dt>
+    <dt>サイト</dt>
     <dd>http://minatopj.php.xdomain.jp/</dd>
-    <dt>���[��</dt>
+    <dt>メール</dt>
     <dd>clannad.ilove.magister at gmail.com</dd>
 </dl>
 
 ## History
 | Revision | Updates |
 |:---------------:|:-----------------|
-| 2018.1.7.0 | �ʒm�̈�̃e�L�X�g���X�V����Ȃ��s����C�� |
-| 2018.1.3.0 | �����[�X |
+| 2018.1.7.0 | 通知領域のテキストが更新されない不具合を修正 |
+| 2018.1.3.0 | リリース |
